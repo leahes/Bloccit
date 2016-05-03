@@ -15,12 +15,12 @@ group :production do
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
 end
 
 group :development do
   gem 'spring'
-  gem 'sqlite3'
   gem 'web-console', '~> 2.0'
 end
