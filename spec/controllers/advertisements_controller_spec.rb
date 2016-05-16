@@ -23,7 +23,7 @@ RSpec.describe AdvertisementsController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show, id: advertisement.id
+      get :show
       expect(response).to have_http_status(:success)
     end
 
@@ -48,20 +48,20 @@ RSpec.describe AdvertisementsController, type: :controller do
       expect(assigns(:advertisement)).not_to be_nil
     end
   end
+end
 
   describe "GET #create" do
     it "returns http success" do
-      get :create, advertisement:{title: "Title goes here", body: "Body goes here", price: 10}
-      expect(response.status).to eq(302)
+      get :create
+      expect(response).to have_http_status(:success)
     end
 
     it "increases new advertisement by 1" do
-      expect{post :create, advertisement:{title: "Title goes here", body: "Body goes here", price: 10}}.to change {Advertisement.count}.from(1).to(2)
+      expect{post :create, advertisement:{title: "Title goes here", body: "Body goes here", price: 10}}.to change {Advertisement.count}.from(0).to(1)
     end
 
-    it "assigns the new advertisement to @advertisement" do
+    it "assignsthe new advertisement to @advertisement" do
       post :create, advertisement: {title: "Title goes here", body:"Body goes here", price:10}
-      expect(assigns(:advertisement)).to eq Advertisement.last
+      expect(assigns(:advertisement)).to eq Advertisement.old
     end
   end
-end
