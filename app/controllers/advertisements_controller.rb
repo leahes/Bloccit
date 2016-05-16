@@ -12,6 +12,18 @@ class AdvertisementsController < ApplicationController
   end
 
   def create
-    @advertisement = Advertisement.new
+    @advertisement = Advertisement.new(advertisement_params)
+
+    if @advertisement.save
+      redirect_to @advertisement
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def advertisement_params
+    params.require(:advertisement).permit(:title, :body, :price)
   end
 end
