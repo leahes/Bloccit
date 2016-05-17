@@ -24,7 +24,7 @@ describe "GET #index" do
 
    it "renders the #new view" do
     get :new
-    expect(response).to render_template :new
+    expect(response).to render_template(:new)
    end
 
    it "instantiates @post" do
