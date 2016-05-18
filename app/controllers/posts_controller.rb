@@ -6,7 +6,6 @@ class PostsController < ApplicationController
       post.title = "SPAM"
     end
   end
-end
 
   def show
     @post = Post.find(params[:id])
