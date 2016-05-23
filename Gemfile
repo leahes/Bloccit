@@ -21,6 +21,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda'
 end
 
 group :development do
