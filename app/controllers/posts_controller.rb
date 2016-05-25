@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
   def index
-    @post = Post.all
-    @post.each_with_index do |post, index|
-    if index % 5 == 0
-      post.title = "SPAM"
+    @posts = Post.all
+    @posts.each_with_index do |post, index|
+      if index % 5 == 0
+        post.title = "SPAM"
+      end
     end
   end
 
@@ -18,9 +19,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.new
     @post.title = params[:post][:title]
-    @post.body = params [:post][:body]
+    @post.body = params[:post][:body]
 
-    if @post.Save
+    if @post.save
 
       flash[:notice] = "Post was saved successfully"
       redirect_to @post
