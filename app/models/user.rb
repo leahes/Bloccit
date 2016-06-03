@@ -15,4 +15,15 @@ class User < ActiveRecord::Base
 
 
    has_secure_password
+
+   def format_name
+     if name
+       name_array = []
+       name.split.each do |name_part|
+       name_array << name_part.capitalize
+     end
+
+     self.name = name_array.join(" ")
+   end
  end
+end
