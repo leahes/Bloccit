@@ -45,7 +45,7 @@ end
 
 user = User.first
  user.update_attributes!(
-   email: 'youremail.com', # replace this with your personal email
+   email: 'sugarchefleah@gmail.com', # replace this with your personal email
    password: 'helloworld'
  )
 
