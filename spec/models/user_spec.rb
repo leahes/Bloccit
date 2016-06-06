@@ -23,9 +23,9 @@ let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", passw
      end
 
      it "should format the users name" do
-       user.name = "user user"
+       user.name = "User User"
        user.save
-      expect(user.name).to eq "user user"
+      expect(user.name).to eq "User User"
      end
    end
 
