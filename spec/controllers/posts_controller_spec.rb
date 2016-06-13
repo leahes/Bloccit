@@ -8,7 +8,7 @@ RSpec.describe PostsController, type: :controller do
   let(:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user) }
 
   context "guest user" do
-   # #6
+   
        describe "GET show" do
          it "returns http success" do
            get :show, topic_id: my_topic.id, id: my_post.id
