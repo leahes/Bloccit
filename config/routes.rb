@@ -8,6 +8,6 @@ end
 
 
   get 'about' => 'welcome#about'
-
+  get 'faq' => 'welcome#faq'
   root 'welcome#index'
 end
