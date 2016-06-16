@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
+<<<<<<< HEAD
+=======
+
+>>>>>>> checkpoint-38-work
   let(:my_user) { User.create!(name: "Blochead", email: "blochead@bloc.io", password: "password") }
 
      describe "GET new" do
@@ -10,6 +14,26 @@ RSpec.describe SessionsController, type: :controller do
        end
      end
 
+<<<<<<< HEAD
+=======
+     describe "DELETE sessions/id" do
+        it "render the #welcome view" do
+          delete :destroy, id: my_user.id
+          expect(response).to redirect_to root_path
+        end
+
+        it "deletes the user's session" do
+          delete :destroy, id: my_user.id
+          expect(assigns(:session)).to be_nil
+        end
+
+        it "flashes #notice" do
+          delete :destroy, id: my_user.id
+          expect(flash[:notice]).to be_present
+        end
+      end
+
+>>>>>>> checkpoint-38-work
      describe "POST sessions" do
        it "returns http success" do
          post :create, session: {email: my_user.email}
@@ -40,6 +64,7 @@ RSpec.describe SessionsController, type: :controller do
          post :create, session: {email: my_user.email, password: my_user.password}
          expect(response).to redirect_to(root_path)
        end
+<<<<<<< HEAD
      end
 
 
@@ -59,4 +84,17 @@ RSpec.describe SessionsController, type: :controller do
         expect(flash[:notice]).to be_present
       end
     end
+=======
+
+       it "sets user password_confirmation properly" do
+       post :create, user: new_user_attributes
+       expect(assigns(:user).password_confirmation).to eq new_user_attributes[:password_confirmation]
+      end
+
+     it "logs the user in after sign up" do
+       post :create, user: new_user_attributes
+       expect(session[:user_id]).to eq assigns(:user).id
+     end
+   end
+>>>>>>> checkpoint-38-work
 end

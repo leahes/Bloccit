@@ -58,10 +58,19 @@ RSpec.describe UsersController, type: :controller do
        post :create, user: new_user_attributes
        expect(assigns(:user).password_confirmation).to eq new_user_attributes[:password_confirmation]
      end
+<<<<<<< HEAD
      
      it "logs the user in after sign up" do
       post :create, user: new_user_attributes
       expect(session[:user_id]).to eq assigns(:user).id
     end
   end
+=======
+
+     it "logs the user in after sign up" do
+       post :create, user: new_user_attributes
+       expect(session[:user_id]).to eq assigns(:user).id
+     end
+   end
+>>>>>>> checkpoint-38-work
 end
