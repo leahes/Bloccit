@@ -4,7 +4,6 @@ class TopicsController < ApplicationController
 
   before_action :authorize_user, except: [:index, :show]
 
-
   def index
     @topics = Topic.all
   end
@@ -44,7 +43,7 @@ class TopicsController < ApplicationController
      if @topic.save
         flash[:notice] = "Topic was updated successfully."
        redirect_to @topic
-       
+
      else
        flash.now[:alert] = "Error saving topic. Please try again."
        render :edit
