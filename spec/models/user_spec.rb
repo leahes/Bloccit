@@ -6,17 +6,17 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:posts) }
    it { is_expected.to have_many(:comments) }
 
-   # Shoulda tests for name
+
    it { is_expected.to validate_presence_of(:name) }
    it { is_expected.to validate_length_of(:name).is_at_least(1) }
 
-   # Shoulda tests for email
+
    it { is_expected.to validate_presence_of(:email) }
    it { is_expected.to validate_uniqueness_of(:email) }
    it { is_expected.to validate_length_of(:email).is_at_least(3) }
    it { is_expected.to allow_value("user@bloccit.com").for(:email) }
 
-   # Shoulda tests for password
+
    it { is_expected.to validate_presence_of(:password) }
    it { is_expected.to have_secure_password }
    it { is_expected.to validate_length_of(:password).is_at_least(6) }
@@ -43,24 +43,40 @@ RSpec.describe User, type: :model do
        expect(user).to respond_to(:role)
      end
 
+<<<<<<< HEAD
  # #2
+=======
+
+>>>>>>> checkpoint-39-work
      it "responds to admin?" do
        expect(user).to respond_to(:admin?)
      end
 
+<<<<<<< HEAD
  # #3
+=======
+
+>>>>>>> checkpoint-39-work
      it "responds to member?" do
        expect(user).to respond_to(:member?)
      end
    end
 
    describe "roles" do
+<<<<<<< HEAD
  # #4
+=======
+
+>>>>>>> checkpoint-39-work
      it "is member by default" do
        expect(user.role).to eq("member")
      end
 
+<<<<<<< HEAD
  # #5
+=======
+
+>>>>>>> checkpoint-39-work
      context "member user" do
        it "returns true for #member?" do
          expect(user.member?).to be_truthy
@@ -71,7 +87,11 @@ RSpec.describe User, type: :model do
        end
      end
 
+<<<<<<< HEAD
  # #6
+=======
+
+>>>>>>> checkpoint-39-work
      context "admin user" do
        before do
          user.admin!
@@ -80,6 +100,7 @@ RSpec.describe User, type: :model do
        it "returns false for #member?" do
          expect(user.member?).to be_falsey
        end
+<<<<<<< HEAD
 
        it "returns true for #admin?" do
          expect(user.admin?).to be_truthy
@@ -124,6 +145,52 @@ RSpec.describe User, type: :model do
          user.admin!
        end
 
+=======
+
+       it "returns true for #admin?" do
+         expect(user.admin?).to be_truthy
+       end
+     end
+
+     it "responds to role" do
+       expect(user).to respond_to(:role)
+     end
+
+
+     it "responds to admin?" do
+       expect(user).to respond_to(:admin?)
+     end
+
+
+     it "responds to member?" do
+       expect(user).to respond_to(:member?)
+     end
+   end
+
+   describe "roles" do
+
+     it "is member by default" do
+       expect(user.role).to eq("member")
+     end
+
+
+     context "member user" do
+       it "returns true for #member?" do
+         expect(user.member?).to be_truthy
+       end
+
+       it "returns false for #admin?" do
+         expect(user.admin?).to be_falsey
+       end
+     end
+
+
+     context "admin user" do
+       before do
+         user.admin!
+       end
+
+>>>>>>> checkpoint-39-work
        it "returns false for #member?" do
          expect(user.member?).to be_falsey
        end

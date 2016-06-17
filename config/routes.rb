@@ -14,7 +14,7 @@ end
 =======
 >>>>>>> checkpoint-38-work
   get 'about' => 'welcome#about'
-
+  get 'faq' => 'welcome#faq'
   root 'welcome#index'
   end
 end

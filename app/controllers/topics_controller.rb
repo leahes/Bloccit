@@ -1,4 +1,9 @@
 class TopicsController < ApplicationController
+
+  before_action :require_sign_in, except: [:index, :show]
+
+  before_action :authorize_user, except: [:index, :show]
+
   def index
     @topics = Topic.all
   end
@@ -40,6 +45,7 @@ class TopicsController < ApplicationController
        @topic.labels = Label.update_labels(params[:topic][:labels])
         flash[:notice] = "Topic was updated successfully."
        redirect_to @topic
+
      else
        flash.now[:alert] = "Error saving topic. Please try again."
        render :edit
