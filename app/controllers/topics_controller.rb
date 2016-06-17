@@ -75,4 +75,4 @@ class TopicsController < ApplicationController
        redirect_to topics_path
      end
    end
-end
+ end
