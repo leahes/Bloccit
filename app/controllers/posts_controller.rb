@@ -17,7 +17,7 @@ class PostsController < ApplicationController
 
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build(post_params)
-    @post.user = @topic
+    @post.user = @user
     if @post.save
 
       flash[:notice] = "Post was saved successfully"
