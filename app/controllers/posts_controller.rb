@@ -16,19 +16,13 @@ class PostsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build(post_params)
-<<<<<<< HEAD
-    @post.user = @topic
-    if @post.save
-      @post.labels = Label.update_labels(params[:post][:labels])
-=======
-    @post.user = current_user
+    @post.user = @user
 
     if @post.save
->>>>>>> checkpoint-39-work
+      @post.labels = Label.update_labels(params[:post][:labels])
       flash[:notice] = "Post was saved successfully"
       redirect_to [@topic, @post]
     else
-
       flash.now[:alert] = "There was an error saving the post. Please try again."
       render :new
     end

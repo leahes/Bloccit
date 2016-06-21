@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 5.times do
    User.create!(
- # #3
+
    name:     RandomData.random_name,
    email:    RandomData.random_email,
    password: RandomData.random_sentence
