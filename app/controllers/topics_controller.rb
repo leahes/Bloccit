@@ -1,5 +1,4 @@
 class TopicsController < ApplicationController
-
   before_action :require_sign_in, except: [:index, :show]
 
   before_action :authorize_user, except: [:index, :show]
@@ -23,66 +22,66 @@ class TopicsController < ApplicationController
 
     if @topic.save
       @topic.labels = Label.update_labels(params[:topic][:labels])
-      flash[:notice] = "Topic was saved successfully."
+      flash[:notice] = 'Topic was saved successfully.'
       redirect_to @topic
     else
-      flash.now[:alert] = "Error creating topic. Please try again."
+      flash.now[:alert] = 'Error creating topic. Please try again.'
       render :new
     end
   end
 
-    def edit
-      @topic = Topic.find(params[:id])
+  def edit
+    @topic = Topic.find(params[:id])
+  end
+
+  def update
+    @topic = Topic.find(params[:id])
+
+    @topic.name = params[:topic][:name]
+    @topic.description = params[:topic][:description]
+    @topic.public = params[:topic][:public]
+    @topic.assign_attributes(topic_params)
+
+    if @topic.save
+      @topic.labels = Label.update_labels(params[:topic][:labels])
+      flash[:notice] = 'Topic was updated successfully.'
+      redirect_to @topic
+
+    else
+      flash.now[:alert] = 'Error saving topic. Please try again.'
+      render :edit
     end
+ end
 
-    def update
-     @topic = Topic.find(params[:id])
+  def destroy
+    @topic = Topic.find(params[:id])
 
-     @topic.name = params[:topic][:name]
-     @topic.description = params[:topic][:description]
-     @topic.public = params[:topic][:public]
-     @topic.assign_attributes(topic_params)
+    if @topic.destroy
+      flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
+      redirect_to action: :index
+    else
+      flash.now[:alert] = 'There was an error deleting the topic.'
+      render :show
+    end
+  end
 
-     if @topic.save
-       @topic.labels = Label.update_labels(params[:topic][:labels])
-        flash[:notice] = "Topic was updated successfully."
-       redirect_to @topic
+  private
 
-     else
-       flash.now[:alert] = "Error saving topic. Please try again."
-       render :edit
-     end
-   end
+  def topic_params
+    params.require(:topic).permit(:name, :description, :public)
+  end
 
-   def destroy
-     @topic = Topic.find(params[:id])
-
-     if @topic.destroy
-       flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
-       redirect_to action: :index
-     else
-       flash.now[:alert] = "There was an error deleting the topic."
-       render :show
-     end
-   end
-
-   private
-
-   def topic_params
-     params.require(:topic).permit(:name, :description, :public)
-   end
-
-   def authorize_user
-     unless current_user.admin?
-       flash[:alert] = "You must be an admin to do that."
-       redirect_to topics_path
-     end
+  def authorize_user
+    unless current_user.admin?
+      flash[:alert] = 'You must be an admin to do that.'
+      redirect_to topics_path
+    end
 
     def authorize_moderator
       unless current_user.moderator?
-      flash[:alert] = "You must be a moderator to do that."
-      redirect_to topics_path
+        flash[:alert] = 'You must be a moderator to do that.'
+        redirect_to topics_path
       end
     end
-  end
+ end
 end
