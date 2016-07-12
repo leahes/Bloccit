@@ -4,7 +4,8 @@ class PostsController < ApplicationController
   before_action :authorize_user, except: [:show, :new, :create]
 
   def show
-    @post = Post.find(params[:id])
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:id])
   end
 
   def new
@@ -15,7 +16,7 @@ class PostsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build(post_params)
-    @post.user = @user
+    @post.user = current_user
 
     if @post.save
       flash[:notice] = 'Post was saved successfully'

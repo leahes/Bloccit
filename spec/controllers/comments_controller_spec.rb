@@ -12,14 +12,14 @@ RSpec.describe CommentsController, type: :controller do
     describe 'POST create' do
       it 'redirects the user to the sign in view' do
         post :create, post_id: my_post.id, comment: { body: RandomData.random_paragraph }
-        expect(response).to redirect_to(new_post_session_path)
+        expect(response).to redirect_to(new_session_path)
       end
     end
 
     describe 'DELETE destroy' do
       it 'redirects the user to the sign in view' do
         delete :destroy, post_id: my_post.id, id: my_comment.id
-        expect(response).to redirect_to(new_post_session_path)
+        expect(response).to redirect_to(new_session_path)
       end
     end
   end

@@ -3,7 +3,6 @@ class TopicsController < ApplicationController
 
   before_action :authorize_user, except: [:index, :show]
 
-  before_action :moderator, only: [:update]
 
   def index
     @topics = Topic.all
@@ -21,7 +20,6 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
 
     if @topic.save
-      @topic.labels = Label.update_labels(params[:topic][:labels])
       flash[:notice] = 'Topic was saved successfully.'
       redirect_to @topic
     else
@@ -43,7 +41,6 @@ class TopicsController < ApplicationController
     @topic.assign_attributes(topic_params)
 
     if @topic.save
-      @topic.labels = Label.update_labels(params[:topic][:labels])
       flash[:notice] = 'Topic was updated successfully.'
       redirect_to @topic
 
@@ -76,12 +73,5 @@ class TopicsController < ApplicationController
       flash[:alert] = 'You must be an admin to do that.'
       redirect_to topics_path
     end
-
-    def authorize_moderator
-      unless current_user.moderator?
-        flash[:alert] = 'You must be a moderator to do that.'
-        redirect_to topics_path
-      end
-    end
- end
+  end
 end
