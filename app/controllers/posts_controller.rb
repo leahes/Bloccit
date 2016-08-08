@@ -33,8 +33,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.labels = Label.update_labels(params[:post][:labels])
     @post = Post.find(params[:id])
+    @post.labels = Label.update_labels(params[:post][:labels])
     @post.assign_attributes(post_params)
 
     if @post.save
