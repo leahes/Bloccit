@@ -24,7 +24,6 @@ RSpec.describe Post, type: :model do
 
   describe 'attributes' do
     it 'has title, body attributes, user attribute' do
-      # expect(post).to have_attributes(title: title, body: body, user: user)
       expect(post).to respond_to(:title)
     end
   end

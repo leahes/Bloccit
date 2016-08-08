@@ -78,7 +78,6 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
-  # #9
   context "admin user doing CRUD on a comment they don't own" do
     before do
       other_user.admin!
