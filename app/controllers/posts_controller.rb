@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class PostsController < ApplicationController 
 
   before_action :require_sign_in, except: :show
 
