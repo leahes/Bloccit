@@ -272,60 +272,17 @@ RSpec.describe TopicsController, type: :controller do
       end
     end
 
-
     context "moderator user" do
       before do
         user = User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :moderator)
         create_session(user)
       end
 
-      describe "GET index" do
-        it "returns http success" do
-          get :index
-          expect(response).to have_http_status(:success)
-        end
-
-        it "assigns Topic.all to topic" do
-          get :index
-          expect(assigns(:topics)).to eq([my_topic])
-        end
-      end
-
-      describe "GET show" do
-        it "returns http success" do
-          get :show, {id: my_topic.id}
-          expect(response).to have_http_status(:success)
-        end
-
-        it "renders the #show view" do
-          get :show, {id: my_topic.id}
-          expect(response).to render_template :show
-        end
-
-        it "assigns my_topic to @topic" do
-          get :show, {id: my_topic.id}
-          expect(assigns(:topic)).to eq(my_topic)
-        end
-      end
-
-      describe "GET new" do
-        it "returns http redirect" do
-          get :new
-          expect(response).to redirect_to(topics_path)
-        end
-      end
-
       describe "POST create" do
-        it "returns http redirect" do
-          post :create, topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}
-          expect(response).to redirect_to(topics_path)
-        end
-      end
-
-      describe "GET edit" do
-        it "returns http redirect" do
-          get :edit, {id: my_topic.id}
-          expect(response).to redirect_to(topics_path)
+        it "does not allow the request" do
+          expect {
+            post :create, topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph }
+          }.to change { flash[:alert] }.to("You must be a moderator to do that.")
         end
       end
 
@@ -340,9 +297,10 @@ RSpec.describe TopicsController, type: :controller do
       end
 
       describe "DELETE destroy" do
-        it "returns http redirect" do
-          delete :destroy, {id: my_topic.id}
-          expect(response).to redirect_to(topics_path)
+        it "does not allow the request" do
+          expect {
+            delete :destroy, {id: my_topic.id}
+          }.to change { flash[:alert] }.to("You must be a moderator to do that.")
         end
       end
     end
