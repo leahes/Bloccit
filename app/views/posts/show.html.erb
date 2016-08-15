@@ -24,7 +24,7 @@
        </div>
      </h3>
      <% if current_user %>
-       <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+       <%= render partial: 'favourites/favourite', locals: { post: @post } %>
      <% end %>
    </div>
    <div class="row">
@@ -38,14 +38,11 @@
      <div class="col-md-8">
        <div class="media">
            <h4 class="media-heading">
-           <%= link_to post.title, topic_post_path(@topic, post) %>
+           <%= link_to @post.title, topic_post_path(@topic, @post) %>
          </h4>
        </div>
       <% if current_user %>
     <%= render 'comments/form', comment: Comment.new, post: @post %>
    <% end %>
-  </div>
- <% end %>
  </div>
- </div>
- 
+</div>

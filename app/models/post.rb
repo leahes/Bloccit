@@ -14,7 +14,7 @@ class Post < ActiveRecord::Base
   validates :topic, presence: true
   validates :user, presence: true
 
-  def up_votes
+   def up_votes
      votes.where(value: 1).count
    end
 
