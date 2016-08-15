@@ -23,6 +23,9 @@
          </small>
        </div>
      </h3>
+     <% if current_user %>
+       <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+     <% end %>
    </div>
    <div class="row">
     <div class="col-md-8">
@@ -38,9 +41,11 @@
            <%= link_to post.title, topic_post_path(@topic, post) %>
          </h4>
        </div>
-   <% if current_user %>
+      <% if current_user %>
     <%= render 'comments/form', comment: Comment.new, post: @post %>
    <% end %>
   </div>
  <% end %>
-</div>
+ </div>
+ </div>
+ 
