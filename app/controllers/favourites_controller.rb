@@ -7,11 +7,14 @@ class FavouritesController < ApplicationController
 
      if favourite.save
        flash[:notice] = "Post favourited."
+       redirect_to [post.topic, post]
      else
        flash[:alert] = "Favouriting failed."
+       redirect_to [post.topic, post]
      end
+   end
 
-    def destroy
+  def destroy
      post = Post.find(params[:post_id])
      favourite = current_user.favourites.find(params[:id])
 
@@ -22,6 +25,5 @@ class FavouritesController < ApplicationController
      end
 
      redirect_to [post.topic, post]
-    end
   end
 end
