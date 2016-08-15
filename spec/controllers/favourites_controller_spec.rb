@@ -37,7 +37,6 @@ RSpec.describe FavouritesController, type: :controller do
         end
 
         it 'creates a favourite for the current user and specified post' do
-
           expect(my_user.favourites.find_by_post_id(my_post.id)).to be_nil
 
           post :create, { post_id: my_post.id }
@@ -59,7 +58,6 @@ RSpec.describe FavouritesController, type: :controller do
          expect( my_user.favourites.find_by_post_id(my_post.id) ).not_to be_nil
 
          delete :destroy, { post_id: my_post.id, id: favourite.id }
-
 
          expect( my_user.favourites.find_by_post_id(my_post.id) ).to be_nil
        end

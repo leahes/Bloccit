@@ -21,7 +21,7 @@ class FavouritesController < ApplicationController
        flash[:alert] = "Unfavoriting failed."
      end
 
-       redirect_to [post.topic, post]
-     end
-   end
- end
+     redirect_to [post.topic, post]
+    end
+  end
+end
