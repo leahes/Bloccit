@@ -11,7 +11,6 @@ class CommentsController < ApplicationController
     end
 
     @comment = @parent.comments.find params[:id]
-    comment.user = current_user
 
     if comment.save
       flash[:notice] = 'Comment saved successfully.'

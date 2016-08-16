@@ -16,16 +16,15 @@
      <div class="col-md-8">
        <div class="media">
            <h4 class="media-heading">
-           <%= link_to post.title, topic_post_path(@topic, post) %>
+           <%= link_to @post.title, topic_post_path(@topic, @post) %>
          </h4>
          <small>
-           submitted <%= time_ago_in_words(post.created_at) %> ago by <% post.user.name %> <br>
-           <%= post.comments.count %> comments
+           submitted <%= time_ago_in_words(@post.created_at) %> ago by <% @post.user.name %> <br>
+           <%= @post.comments.count %> comments
          </small>
        </div>
    <% if current_user %>
-    <%= render 'comments/form', comment: locals: {parent: @post} %>
+    <%= render 'comments/form', locals: {parent: @post} %>
    <% end %>
   </div>
- <% end %>
 </div>
