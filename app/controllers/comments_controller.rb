@@ -3,18 +3,19 @@ class CommentsController < ApplicationController
   before_action :authorize_user, only: [:destroy]
 
   def create
-    @post = Post.find(params[:post_id] || params[:topic_id])
     if params[:post_id]
-      @parent = Post.find id
+      @post = Post.find params[:post_id]
+      @comment = @post.comments.build(comment_params)
+      @comment.user = current_user
+      @comment.save
+      redirect_to [@post.topic, @post]
     elsif params[:topic_id]
-      @parent = Topic.find id
-
-    @comment = @parent.comments.find params[:id]
-    @comment.save
-   end
-
-   redirect_to [@post.topic, @post]
-   end
+      @topic = Topic.find params[:topic_id]
+      @comment = @topic.comments.build(comment_params)
+      @comment.user = current_user
+      @comment.save
+      redirect_to @topic
+    end
   end
 
   def destroy
@@ -29,7 +30,6 @@ class CommentsController < ApplicationController
       redirect_to [@post.topic, @post]
     end
   end
-end
 
   private
 
