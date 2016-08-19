@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favourites, dependent: :destroy
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 
@@ -13,7 +14,7 @@ class Post < ActiveRecord::Base
   validates :topic, presence: true
   validates :user, presence: true
 
-  def up_votes
+   def up_votes
      votes.where(value: 1).count
    end
 

@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
-   has_many :comments, dependent: :destroy
-   has_many :votes, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
+  has_many :favourites, dependent: :destroy
+
 
   before_save { self.email = email.downcase }
   before_save { self.role ||= :member }
@@ -18,4 +20,8 @@ class User < ActiveRecord::Base
   has_secure_password
 
   enum role: [:member, :admin]
+
+  def favourite_for(post)
+    favourites.where(post_id: post.id).first
+  end
 end
