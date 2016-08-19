@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-0" http-equiv="content-type" />
+</head>
+<body>
+  <h1>You're now following "<%= @post.title %>", you will be notified of all comments. If you dont wish to recieve further notifications unfavourite your <%= link_to "post", topic_post_url@post.topic, @post) %>.</h1>
+  <p>
+    <%= link_to "view Post on site", topic_post_url(@post.topic, @post) %>
+  </p>
+</body>
+</html>
