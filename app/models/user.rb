@@ -21,7 +21,17 @@ class User < ActiveRecord::Base
 
   enum role: [:member, :admin]
 
+
   def favourite_for(post)
     favourites.where(post_id: post.id).first
   end
+
+  def avatar_url(size)
+     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
+     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+   end
+
+  #  def favorited_posts
+  #    Post.joins(:favourites).where(favourites: { user_id: self.id })
+  #  end
 end
