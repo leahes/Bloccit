@@ -26,9 +26,10 @@
      <% end %>
    </div>
    <h3> Comments</h3>
-   <% @topic.comments.each do |comment| %>
-   <%= render partial: "comments/comment", locals: {parent: @topic, comment: comment} %>
-   <% end %>
+    <%= render partial: "comments/comment", collection: @topic.comments %>
+    <% @topic.comments.each do |comment| %>
+      <%= render partial: "comments/comment", locals: {zone: @topic}, object: comment %>
+    <% end %>
     <%= render @topic.comments %>
       <% if current_user %>
       <%= render 'comments/form', comment: Comment.new, parent: @topic %>
