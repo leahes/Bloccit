@@ -24,7 +24,10 @@
          </small>
        </div>
    <% if current_user %>
-    <%= render 'comments/form', locals: {parent: @post} %>
+   <% @post.comments.each do |comment| %>
+     <%= render partial: "comments/comment", locals: {zone: @post}, object: comment %>
+   <% end %>
+    <%= render partial: 'comments/form', locals: { parent: @post } %>
    <% end %>
   </div>
 </div>

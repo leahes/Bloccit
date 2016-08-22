@@ -19,18 +19,24 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @parent  = params[:post_id] || params[:topic_id]
-    @parent = Topic.find(@parent)
+    if params[:post_id]
+      @parent = Post.find(params[:post_id])
+    elsif params[:topic_id]
+      @parent = Topic.find(params[:topic_id])
+    end
 
     comment = Comment.find(params[:id])
-    #@comment = @parent.comments.new comment_params
 
-    if defined?(comment) && comment.destroy
+    if comment.destroy
       flash[:notice] = 'Comment was deleted successfully.'
-      redirect_to [@parent]
     else
       flash[:alert] = "Comment couldn't be deleted. Try again."
+    end
+
+    if @parent.is_a?(Topic)
       redirect_to [@parent]
+    elsif @parent.is_a?(Post)
+      redirect_to [@parent.topic, @parent]
     end
   end
 
