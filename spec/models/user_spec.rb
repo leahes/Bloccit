@@ -65,6 +65,7 @@ RSpec.describe User, type: :model do
           expect(user.admin?).to be_falsey
         end
       end
+    end
 
       context 'admin user' do
         before do
@@ -97,6 +98,7 @@ RSpec.describe User, type: :model do
           favourite = user.favourites.where(post: @post).create
 
           expect(user.favourite_for(@post)).to eq(favourite)
+        end
 
       describe ".avatar_url" do
         let(:known_user) { create(:user, email: "blochead@bloc.io") }

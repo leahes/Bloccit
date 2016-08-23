@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
        flash[:alert] = "You must be signed in to view private topics."
        redirect_to new_session_path
      end
-  end
+   end
 
   def new
     @topic = Topic.new

@@ -41,5 +41,5 @@ RSpec.describe Topic, type: :model do
        end
      end
    end
-  end
+ end
 end
