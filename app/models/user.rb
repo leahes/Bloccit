@@ -32,10 +32,6 @@ class User < ActiveRecord::Base
      "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
    end
 
-  #  def favorited_posts
-  #    Post.joins(:favourites).where(favourites: { user_id: self.id })
-  #  end
-
   def generate_auth_token
      loop do
        self.auth_token = SecureRandom.base64(64)
