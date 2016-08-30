@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
 
   enum role: [:member, :admin]
 
-
   def favourite_for(post)
     favourites.where(post_id: post.id).first
   end
