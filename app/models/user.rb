@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :favourites, dependent: :destroy
 
-
   before_save { self.email = email.downcase }
   before_save { self.role ||= :member }
 
@@ -33,5 +32,13 @@ class User < ActiveRecord::Base
 
    def favorited_posts
      Post.joins(:favourites).where(favourites: { user_id: self.id })
+   end
+
+   def posts?
+     posts.any?
+   end
+
+   def comments?
+     comments.any?
    end
 end
