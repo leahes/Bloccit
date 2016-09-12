@@ -6,7 +6,7 @@ include SessionsHelper
    let(:my_user) { create(:user) }
    let(:other_user) { create(:user) }
    let(:user_post) { create(:post, topic: my_topic, user: other_user) }
-   
+
 
    let(:my_vote) { Vote.create!(value: 1) }
 
@@ -14,13 +14,13 @@ include SessionsHelper
    context "guest" do
      describe "POST up_vote" do
        it "redirects the user to the sign in view" do
-         post :up_vote, post_id: user_post.id
+         post :up_vote, format: :js, post_id: user_post.id
          expect(response).to redirect_to(new_session_path)
        end
      end
      describe "POST down_vote" do
        it "redirects the user to the sign in view" do
-         post :down_vote, post_id: user_post.id
+         post :down_vote, format: :js, post_id: user_post.id
          expect(response).to redirect_to(new_session_path)
        end
      end
@@ -36,7 +36,7 @@ include SessionsHelper
      describe "POST up_vote" do
        it "the users first vote increases number of post votes by one" do
          votes = user_post.votes.count
-         post :up_vote, post_id: user_post.id
+         post :up_vote, format: :js, post_id: user_post.id
          expect(user_post.votes.count).to eq(votes + 1)
        end
 
@@ -73,7 +73,7 @@ include SessionsHelper
      describe "POST down_vote" do
        it "the users first vote increases number of post votes by one" do
          votes = user_post.votes.count
-         post :down_vote, post_id: user_post.id
+         post :down_vote, format: :js, post_id: user_post.id
          expect(user_post.votes.count).to eq(votes + 1)
        end
 
